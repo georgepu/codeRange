@@ -1,0 +1,28 @@
+{
+  "name": "jsEx",
+  "version": "1.0.0",
+  "description": "This is a repo for JavaScript exercises.",
+  "main": "",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/georgepu/codeRange.git"
+  },
+  "author": "George Pu",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/georgepu/codeRange/issues"
+  },
+  "homepage": "https://github.com/georgepu/codeRange#readme",
+  "devDependencies": {
+    "eslint": "^4.19.1",
+    "eslint-config-standard": "^11.0.0",
+    "eslint-plugin-import": "^2.12.0",
+    "eslint-plugin-node": "^6.0.1",
+    "eslint-plugin-promise": "^3.8.0",
+    "eslint-plugin-react": "^7.9.1",
+    "eslint-plugin-standard": "^3.1.0"
+  }
+}
