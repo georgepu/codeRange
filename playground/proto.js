@@ -33,11 +33,11 @@ console.log(car3.__proto__);
 	}
 })('aaaabaaccdccaabaaaa');
 
-var x=[{name:"Jhon", 
+var x=[{name:"Jhon",
         hobbies:["cricket","Chess", "Camping" ]},
-       {name:"Sam", 
+       {name:"Sam",
         hobbies:["PinPong","hockey"]}];
-//write a function/method: to return string of all hobbies in the above variable x separated by " # " . 
+//write a function/method: to return string of all hobbies in the above variable x separated by " # " .
 // sample output:   "cricket # Chess # Camping # PinPong # hockey"
 let newList=[];
 for (let i of x) {
@@ -45,3 +45,11 @@ for (let i of x) {
 }
 let showIt=newList.join(' # ');
 console.log(`get this:	${showIt}`);
+
+(function countChar(inputStr) {
+  let newStr=inputStr.split('');
+  let count=newStr.filter((value)=>{
+    return value===newStr[0];
+  })
+  console.log(`'${count[0]}' repeats ${count.length} times`);
+})('george')
