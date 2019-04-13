@@ -31,6 +31,14 @@ console.log(car3.__proto__);
   } else {
     console.log(false)
   }
+})('aaaabaaccdccaabaaaa');
+
+(function isPalindrome2 (inputStr) {
+  if (inputStr === inputStr.split('').reverse().join('')) {
+    console.log(true)
+  } else {
+    console.log(false)
+  }
 })('aaaabaaccdccaabaaaa')
 
 var x = [{ name: 'Jhon',
@@ -66,4 +74,61 @@ console.log(`get this:	${showIt}`);
   let seperate = email.split('@')[0].split('.')
   console.log(`Firstname is: ${seperate[0]};`)
   console.log(`Lastname is: ${seperate[1]};`)
-})('wencheng.tong@intel.com')
+})('wencheng.tong@intel.com');
+
+// write a function that returns the longest word in the sentence
+(function showLongestWord (inputStr) {
+  let result
+  let seperate = inputStr.split(' ')
+  console.log(seperate)
+  for (let word of seperate) {
+    result = seperate.filter((individual) => {
+      return word.length < individual.length
+    })
+    if (result.length === 0) {
+      console.log(`The longest word is: ${word}`)
+    }
+  }
+})('The quick brown fox jumped over the lazy dogs');
+
+(function showLongestWord2 (inputStr) {
+  let longestWord = inputStr.split(' ').reduce((longest, word) => {
+    return longest.length > word.length ? longest : word
+  }, '')
+  console.log(`The result is: ${longestWord}`)
+})('The quick brown fox jumped over the jumped lazy dogs')
+
+let a = {
+  field: 'field',
+  getField: function () {
+    return function () {
+      return this.field
+    }
+  }
+}
+
+let callback = a.getField().apply(a)
+console.log(callback)
+
+// practice promise
+let blockCode = () => {
+  console.log('Hello buddy!')
+}
+
+let promise = new Promise((resolve) => {
+  setTimeout(() => {
+    blockCode()
+    resolve()
+  }, 5000)
+})
+
+Promise.all([promise]).then(() => {
+  console.log(`Now he's got it!`)
+})
+
+// 'abc'.repeatify(3) returns 'abcabcabc'
+String.prototype.repeatify = function (num) {
+  return new Array(num + 1).join(this)
+}
+let newStr = 'abc'.repeatify(3)
+console.log(newStr)

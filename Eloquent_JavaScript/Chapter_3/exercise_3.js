@@ -22,7 +22,7 @@ function countChar (str, char) {
   // for (i = 0; i < str.length; i++) {
   for (i of str) {
     if (i === char) {
-      ++j
+      j++
     }
   }
   return j
