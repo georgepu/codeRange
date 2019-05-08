@@ -1,3 +1,4 @@
+// test
 function foo (num) {
   console.log('foo: ' + num)
   this.count++
