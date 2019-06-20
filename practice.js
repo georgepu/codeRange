@@ -177,3 +177,10 @@ let salaries = {
   const [name = null] = Object.entries(a).sort((x, y) => y[1] - x[1])[0] || []
   console.log(name)
 })(salaries)
+
+// 30. Write a JavaScript function to merge two arrays and removes all duplicates elements.
+// Test data :
+// var array1 = [1, 2, 3];
+// var array2 = [2, 30, 1];
+// console.log(merge_array(array1, array2));
+// [3, 2, 30, 1]
