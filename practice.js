@@ -166,3 +166,14 @@ vehicle.disclaimer()
 let jeep = new Suv('Jeep', 'Grand Cherokee', '2017')
 jeep.print()
 jeep.disclaimer()
+
+// Get person with max salary
+let salaries = {
+  'John': 100,
+  'Pete': 300,
+  'Mary': 250
+};
+((a) => {
+  const [name = null] = Object.entries(a).sort((x, y) => y[1] - x[1])[0] || []
+  console.log(name)
+})(salaries)

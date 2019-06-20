@@ -644,7 +644,6 @@ console.log(
   result = result.sort((a, b) => b.length - a.length)
   console.log(result.filter(a => a.length === result[0].length))
 })(['go', 'google', 'goo', 'george', 'geo', 'geor', 'goog'])
-
 ;(function findCommon2 (arr) {
   let targetStr = ''
   let result = []
@@ -659,3 +658,29 @@ console.log(
   result.push(targetStr)
   console.log(result)
 })(['SQLInjection', 'SQLTutorial', 'SQLhehehehehe', 'SQL', 'SQasdgadg;ahsdga'])
+
+// 29. Write a JavaScript function to fill an array with values (numeric, string with one character) on supplied bounds.
+// Test Data :
+// console.log(num_string_range('a', "z", 2));
+// ["a", "c", "e", "g", "i", "k", "m", "o", "q", "s", "u", "w", "y"]
+;((start, finish, c) => {
+  const alphabetLower = 'abcdefghijklmnopqrstuvwxyz'.split('')
+  const alphabetUpper = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('')
+  let result = []
+  let [a, b] = [start < finish ? start : finish, start < finish ? finish : start]
+  switch (typeof a) {
+    case 'string':
+      const target = /[a-z]/.test(a) ? alphabetLower.filter(e => e >= a && e <= b) : alphabetUpper.filter(e => e >= a && e <= b)
+      for (let i = 0; i < target.length; i = i + c) {
+        result.push(target[i])
+      }
+      break
+    case 'number':
+      for (let i = a; i <= b; i = i + c) {
+        result.push(i)
+      }
+      break
+  }
+  result = start < finish ? result : result.sort((x, y) => -1)
+  console.log(result)
+})('x', 'b', 2)
