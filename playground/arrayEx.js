@@ -667,10 +667,15 @@ console.log(
   const alphabetLower = 'abcdefghijklmnopqrstuvwxyz'.split('')
   const alphabetUpper = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('')
   let result = []
-  let [a, b] = [start < finish ? start : finish, start < finish ? finish : start]
+  let [a, b] = [
+    start < finish ? start : finish,
+    start < finish ? finish : start
+  ]
   switch (typeof a) {
     case 'string':
-      const target = /[a-z]/.test(a) ? alphabetLower.filter(e => e >= a && e <= b) : alphabetUpper.filter(e => e >= a && e <= b)
+      const target = /[a-z]/.test(a)
+        ? alphabetLower.filter(e => e >= a && e <= b)
+        : alphabetUpper.filter(e => e >= a && e <= b)
       for (let i = 0; i < target.length; i = i + c) {
         result.push(target[i])
       }
@@ -684,3 +689,82 @@ console.log(
   result = start < finish ? result : result.sort((x, y) => -1)
   console.log(result)
 })('x', 'b', 2)
+;((st, fi, gap) => {
+  let result = []
+  let step = st < fi ? gap : -gap
+  switch (typeof st) {
+    case 'string':
+      for (
+        let i = st.charCodeAt(0);
+        st < fi ? i <= fi.charCodeAt(0) : i >= fi.charCodeAt(0);
+        i += step
+      ) {
+        result.push(String.fromCharCode(i))
+      }
+      break
+    case 'number':
+      for (let i = st; st < fi ? i <= fi : i >= fi; i += step) {
+        result.push(i)
+      }
+      break
+  }
+  console.log(result)
+})(99, 76, 2)
+
+// 30. Write a JavaScript function to merge two arrays and removes all duplicates elements.
+// Test data :
+// var array1 = [1, 2, 3];
+// var array2 = [2, 30, 1];
+// console.log(merge_array(array1, array2));
+// [3, 2, 30, 1]
+;((arr1, arr2) => {
+  let result = []
+  let worker = {}
+  for (let i of arr1) {
+    worker[i] = i
+  }
+  for (let i of arr2) {
+    worker[i] = i
+  }
+  result = Object.values(worker)
+  console.log(result)
+})([1, 2, 3], [2, 30, 1])
+
+// 31.Write a JavaScript function to remove a specific element from an array.
+// Test data :
+// console.log(remove_array_element([2, 5, 9, 6], 5));
+// [2, 9, 6]
+;((arr, ele) => {
+  console.log(arr.filter(e => e !== ele))
+})([2, 5, 9, 6, 5], 5)
+
+// 32. Write a JavaScript function to find an array contains a specific element.
+// Test data :
+// arr = [2, 5, 9, 6];
+// console.log(contains(arr, 5));
+// [True]
+console.log(((arr, ele) => {
+  for (let e of arr) {
+    if (e === ele) return true
+  }
+  return 'Not found'
+})([2, 8, 9, 6], 5))
+
+// 33. Write a JavaScript script to empty an array keeping the original.
+;((arr) => {
+  console.log(`New array is: `, arr.filter((e) => false))
+  console.log(`Original array is: `, arr)
+})([1, 2, 3, 4, 5, 6, 7, 8, 9])
+
+// 34. Write a JavaScript function to get nth largest element from an unsorted array.
+// Test Data :
+// console.log(nthlargest([ 43, 56, 23, 89, 88, 90, 99, 652], 4));
+// 89
+;((arr, n) => {
+  let temp = arr.concat()
+  console.log(temp.sort((a, b) => a - b)[temp.length - 4])
+  console.log(arr)
+})([43, 56, 23, 89, 88, 90, 99, 652], 4)
+
+// 35. Write a JavaScript function to get a random item from an array. 
+
