@@ -743,16 +743,18 @@ console.log(
 // arr = [2, 5, 9, 6];
 // console.log(contains(arr, 5));
 // [True]
-console.log(((arr, ele) => {
-  for (let e of arr) {
-    if (e === ele) return true
-  }
-  return 'Not found'
-})([2, 8, 9, 6], 5))
+console.log(
+  ((arr, ele) => {
+    for (let e of arr) {
+      if (e === ele) return true
+    }
+    return 'Not found'
+  })([2, 8, 9, 6], 5)
+)
 
 // 33. Write a JavaScript script to empty an array keeping the original.
-;((arr) => {
-  console.log(`New array is: `, arr.filter((e) => false))
+;(arr => {
+  console.log(`New array is: `, arr.filter(e => false))
   console.log(`Original array is: `, arr)
 })([1, 2, 3, 4, 5, 6, 7, 8, 9])
 
@@ -766,5 +768,23 @@ console.log(((arr, ele) => {
   console.log(arr)
 })([43, 56, 23, 89, 88, 90, 99, 652], 4)
 
-// 35. Write a JavaScript function to get a random item from an array. 
+// 35. Write a JavaScript function to get a random item from an array.
+console.log(
+  (arr => arr[Math.floor(Math.random() * arr.length)])([
+    43,
+    56,
+    23,
+    89,
+    88,
+    90,
+    99,
+    652
+  ])
+)
 
+// 36. Write a JavaScript function to create a specified number of elements with pre-filled numeric value array.
+// Test Data :
+// console.log(array_filled(6, 0)); 
+// [0, 0, 0, 0, 0, 0]
+// console.log(array_filled(4, 11));
+// [11, 11, 11, 11]
