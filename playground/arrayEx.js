@@ -784,7 +784,15 @@ console.log(
 
 // 36. Write a JavaScript function to create a specified number of elements with pre-filled numeric value array.
 // Test Data :
-// console.log(array_filled(6, 0)); 
+// console.log(array_filled(6, 0));
 // [0, 0, 0, 0, 0, 0]
 // console.log(array_filled(4, 11));
 // [11, 11, 11, 11]
+;((t, e) => {
+  let i
+  let result = []
+  for (i = 0; i < t; i++) {
+    result.push(e)
+  }
+  console.log(result)
+})(4, 11)
