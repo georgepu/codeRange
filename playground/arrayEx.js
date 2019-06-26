@@ -786,17 +786,83 @@ console.log(array_filled(3, "default value"));
 console.log(array_filled(4, "password"));
 // ["password", "password", "password", "password"]
 
-function array_filled(t, str) {
+/* function array_filled(t, str) {
   let result = [];
   for (let i = 0; i < t; i++) {
     result.push(str);
   }
   return result;
+} */
+function array_filled(t, str) {
+  return Array(t).fill(str);
 }
 
 // 38. Write a JavaScript function to move an array element from one position to another.
 // Test Data :
-// console.log(move([10, 20, 30, 40, 50], 0, 2));
+console.log(move([10, 20, 30, 40, 50], 0, 2));
 // [20, 30, 10, 40, 50]
-// console.log(move([10, 20, 30, 40, 50], -1, -2));
+console.log(move([10, 20, 30, 40, 50], -1, -2));
 // [10, 20, 30, 50, 40]
+function move(arr, ...arg) {
+  let target = arr.splice(arg[0], 1);
+  arr.splice(arg[1] < 0 ? arr.length + arg[1] + 1 : arg[1], null, ...target);
+  return arr;
+}
+
+// 39. Write a JavaScript function to filter false, null, 0 and blank values from an array.
+// Test Data :
+console.log(filter_array_values([58, "", "abcd", true, null, false, 0]));
+// [58, "abcd", true]
+function filter_array_values(arr) {
+  return arr.filter(e => e);
+}
+
+// 40. Write a JavaScript function to generate an array of specified length, filled with integer numbers, increase by one from starting position.
+// Test Data :
+console.log(array_range(1, 4));
+// [1, 2, 3, 4]
+console.log(array_range(-6, 4));
+// [-6, -5, -4, -3]
+function array_range(s, n) {
+  let result = [],
+    i,
+    j;
+  for (i = s, j = 0; j < n; j++, i++) {
+    result.push(i);
+  }
+  return result;
+}
+
+// 41. Write a JavaScript function to generate an array between two integers of 1 step length.
+// Test Data :
+// console.log(rangeBetwee(4, 7));
+// [4, 5, 6, 7]
+// console.log(rangeBetwee(-4, 7));
+// [-4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7]
+
+// 42. Write a JavaScript function to find the unique elements from two arrays.
+// Test Data :
+console.log(difference([1, 2, 3], [100, 2, 1, 10]));
+// ["1", "2", "3", "10", "100"]
+console.log(difference([1, 2, 3, 4, 5], [1, [2], [3, [[4]]], [5, 6]]));
+// ["1", "2", "3", "4", "5", "6"]
+console.log(difference([1, 2, 3], [100, 2, 1, 10]));
+// ["1", "2", "3", "10", "100"]
+
+function deepFlatten(arr) {
+  return arr.reduce((t, e) => {
+    if (e.constructor === Array) {
+      return deepFlatten(e);
+    } else {
+      return t.concat(e);
+    }
+  }, []);
+}
+
+function difference(arr1, arr2) {
+  let obj = {};
+  for (let e of arr1.flat(Infinity).concat(arr2.flat(Infinity))) {
+    obj[e] = e;
+  }
+  return Object.values(obj);
+}
