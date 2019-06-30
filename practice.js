@@ -193,7 +193,7 @@ const boss = {
   },
   anotherObj: {
     ele: 6969,
-    lan() {
+    lynn() {
       const george = () => {
         const ele = 9090;
         console.log(this.ele);
@@ -204,4 +204,23 @@ const boss = {
 };
 global.ele = 8970;
 boss.bobby();
-boss.anotherObj.lan();
+boss.anotherObj.lynn();
+
+function foo(x = 42) {
+  console.log(x);
+}
+foo([,,]);
+
+var x = 8;
+{
+  var x = 10;
+  function weird(x = 2, f = () => x) {
+    var x = 5;
+    console.log(f());
+    console.log(x);
+  }
+  weird(3, () => x *= 3);
+}
+weird(3, () => x * 3);
+weird(3, () => x * 3);
+weird(3, () => x * 3);
