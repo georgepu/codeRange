@@ -10,14 +10,19 @@
     "type": "git",
     "url": "git+https://github.com/millbrookinc/codeRange.git"
   },
-  "author": "Raptors team",
+  "author": "qia0yuan",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/millbrookinc/codeRange/issues"
   },
   "homepage": "https://github.com/millbrookinc/codeRange#readme",
   "devDependencies": {
-    "eslint": "^6.0.1",
+    "eslint": "^5.16.0",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.17.3",
+    "eslint-plugin-jsx-a11y": "^6.2.1",
+    "eslint-plugin-react": "^7.14.0",
     "stylelint": "^10.1.0",
     "stylelint-config-standard": "^18.3.0"
   }

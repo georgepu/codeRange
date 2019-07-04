@@ -5,7 +5,7 @@ console.log(is_string('w3resource'));
 console.log(is_string([1, 2, 4, 0]));
 // false
 function is_string(ele) {
-  return ele.constructor === String;
+	return ele.constructor === String;
 }
 
 // 2. Write a JavaScript function to check whether a string is blank or not.
@@ -15,7 +15,7 @@ console.log(is_Blank('abc'));
 // true
 // false
 function is_Blank(str) {
-  return str.length === 0;
+	return str.length === 0;
 }
 
 // 3. Write a JavaScript function to split a string and convert it into an array of words.
@@ -23,9 +23,9 @@ function is_Blank(str) {
 console.log(string_to_array('Robin Singh'));
 // ["Robin", "Singh"]
 function string_to_array(str) {
-  return str.constructor === String
-    ? str.split(' ')
-    : 'Sorry, we need a string here.:)';
+	return str.constructor === String
+		? str.split(' ')
+		: 'Sorry, we need a string here.:)';
 }
 
 // 4. Write a JavaScript function to extract a specified number of characters from a string.
@@ -33,5 +33,5 @@ function string_to_array(str) {
 console.log(truncate_string('Robin Singh', 4));
 // "Robi"
 function truncate_string(str, n) {
-  return str.trim().substr(0, n);
+	return str.trim().substr(0, n);
 }
