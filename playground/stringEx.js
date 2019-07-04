@@ -35,3 +35,13 @@ console.log(truncate_string('Robin Singh', 4));
 function truncate_string(str, n) {
 	return str.trim().substr(0, n);
 }
+
+// 5. Write a JavaScript function to convert a string in abbreviated form.
+// Test Data :
+console.log(abbrev_name('Robin Singh'));
+// "Robin S."
+function abbrev_name(str) {
+	const split = str.split(' ');
+	const letter = split[split.length - 1].slice(0, 1);
+	return `${split[0]} ${letter}.`;
+}
