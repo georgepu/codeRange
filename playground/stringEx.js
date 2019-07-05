@@ -35,3 +35,11 @@ console.log(truncate_string('Robin Singh', 4));
 function truncate_string(str, n) {
 	return str.trim().substr(0, n);
 }
+
+// 9. Write a JavaScript function to capitalize the first letter of each word in a string.
+// Test Data :
+console.log(capitalize_Words('js string exercises'));
+// "Js String Exercises"
+function capitalize_Words(str) {
+	return str.split(' ').map(capitalize);
+}
