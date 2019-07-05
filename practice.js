@@ -211,16 +211,13 @@ function foo(x = 42) {
 }
 foo([,,]);
 
-var x = 8;
+global.x = 8;
 {
-  var x = 10;
+  global.x = 10;
   function weird(x = 2, f = () => x) {
-    var x = 5;
-    console.log(f());
-    console.log(x);
+    { const x = 5;
+      console.log(f());
+      console.log(x); }
   }
-  weird(3, () => x *= 3);
+  weird(3, () => x * 4);
 }
-weird(3, () => x * 3);
-weird(3, () => x * 3);
-weird(3, () => x * 3);
