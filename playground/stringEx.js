@@ -85,5 +85,44 @@ function capitalize(str) {
 console.log(capitalize_Words('js string exercises'));
 // "Js String Exercises"
 function capitalize_Words(str) {
-	return str.split(' ').map(capitalize);
+	return str
+		.split(' ')
+		.map(capitalize)
+		.join(' ');
+}
+
+// 10. Write a JavaScript function that takes a string which has lower and upper case letters as a parameter and converts upper case letters to lower case, and lower case letters to upper case.
+// Test Data :
+console.log(swapcase('AaBbc'));
+// "aAbBC"
+/* function swapcase(str) {
+	let result = '',
+		e;
+	for (e of str) {
+		result += e.match(/[a-z]/) ? e.toUpperCase() : e.toLowerCase();
+	}
+	return result;
+} */
+function swapcase(str) {
+	return str.replace(/([a-z]+)|([A-Z]+)/g, function(match, chr) {
+		return chr ? match.toUpperCase() : match.toLowerCase();
+	});
+}
+
+// 11. Write a JavaScript function to convert a string into camel case.
+// Test Data:
+console.log(camelize('JavaScript Exercises heydude Howru'));
+console.log(camelize('JavaScript exercises iloveu'));
+console.log(camelize('JavaScriptExercises'));
+// "JavaScriptExercises"
+// "JavaScriptExercises"
+// "JavaScriptExercises"
+function camelize(str) {
+	const regPat = /(\s[a-z]+)|(\s[A-Z]+)|(^\s)/g;
+	const morph = (match, p1, p2, p3) => {
+		if (p1) return capitalize_Words(match.trim());
+		if (p2) return match.trim();
+		if (p3) return;
+	};
+	return str.trim().replace(regPat, morph);
 }
