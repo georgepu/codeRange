@@ -270,7 +270,7 @@ console.log(
 // Output:
 // "&lt;a href=&quot;javascript-string-exercise-17.php&quot; target=&quot;_blank&quot;&gt;"
 function escape_HTML(str) {
-	const regPat = /[\W+]/g;
+	const regPat = /\W/g;
 	return str.replace(regPat, match => {
 		switch (match) {
 		case '&':
@@ -348,4 +348,157 @@ console.log(strip(' w3resource '));
 function strip(str) {
 	const regPat = /^\s|\s$/g;
 	return Array(str.replace(regPat, ''));
+}
+
+// 24. Write a JavaScript function to truncate a string to a certain number of words.
+// Test Data:
+console.log(truncate('The quick brown fox jumps over the lazy dog', 4));
+// Output:
+// "The quick brown fox"
+function truncate(str, n) {
+	return str
+		.split(' ')
+		.splice(0, n)
+		.join(' ');
+}
+
+// 25. Write a JavaScript function to alphabetize a given string.
+// Alphabetize string: An individual string can be alphabetized.This rearranges the letters so they are sorted A to Z.
+// Test Data:
+console.log(alphabetize_string('United States'));
+// Output:
+// "SUadeeinsttt"
+function alphabetize_string(str) {
+	return str
+		.split('')
+		.sort()
+		.join('')
+		.trim();
+}
+
+// 26. Write a JavaScript function to remove the first occurrence of a given 'search string' from a string.
+// Test Data:
+console.log(
+	remove_first_occurrence(
+		'The quick brown fox jumps over the     lazy the dog',
+		'the'
+	)
+);
+// Output:
+// "The quick brown fox jumps over lazy dog"
+function remove_first_occurrence(str, o) {
+	const regPat = new RegExp(`\\s*${o}\\s*`);
+	return str.replace(regPat, ' ');
+}
+
+// 27. Write a JavaScript function to convert ASCII to Hexadecimal format.
+// Test Data:
+console.log(ascii_to_hexa('12'));
+console.log(ascii_to_hexa('100'));
+// Output:
+// "3132"
+// "313030"
+function ascii_to_hexa(str) {
+	// return str.replace(/\d/g, '3$&');
+	let result = '';
+	for (let e of str) {
+		result += Number(e.charCodeAt(0)).toString(16);
+	}
+	return result;
+}
+
+// 28. Write a JavaScript function to convert Hexadecimal to ASCII format.
+// Test Data:
+console.log(hex_to_ascii('3132'));
+console.log(hex_to_ascii('313030'));
+// Output:
+// "12"
+// "100"
+function hex_to_ascii(str) {
+	const split = str.match(/\w\w/g);
+	let result = '';
+	for (let e of split) {
+		result += String.fromCharCode(parseInt(e, 16));
+	}
+	return result;
+}
+
+// 29. Write a JavaScript function to find a word within a string.
+// Test Data:
+console.log(search_word('The quick brown fox', 'fox'));
+console.log(search_word('aa, bb, cc, dd, aa', 'aa'));
+// Output:
+// "'fox' was found 1 times."
+// "'aa' was found 2 times."
+function search_word(str, w) {
+	const regPat = new RegExp(w, 'g');
+	let n = str.match(regPat).length,
+		s = n > 1 ? 's' : '';
+	return `'${w}' was found ${n} time${s}.`;
+}
+
+// 30. Write a JavaScript function check if a string ends with specified suffix.
+// Test Data:
+console.log(string_endsWith('JS PHP PYTHON', 'PYTHON'));
+// true
+console.log(string_endsWith('JS PHP PYTHON', ''));
+// false
+function string_endsWith(str, w) {
+	return w ? str.endsWith(w) : false;
+}
+
+// 31. Write a JavaScript function to escapes special characters(&, <, >, ', ") for use in HTML.
+// Test Data :
+console.log(escape_html('PHP & MySQL'));
+// "PHP &amp; MySQL"
+console.log(escape_html('3 > 2'));
+// "3 &gt; 2"
+function escape_html(str) {
+	const regPat = /\W/g;
+	return str.replace(regPat, match => {
+		switch (match) {
+		case '&':
+			return '&amp;';
+		case '<':
+			return '&lt;';
+		case '>':
+			return '&gl;';
+		case '\'':
+			return '&apos;';
+		case '"':
+			return '&quot;';
+		default:
+			return match;
+		}
+	});
+}
+
+// 32. Write a JavaScript function to remove?non-printable ASCII chars.
+// Test Data :
+console.log(remove_non_ascii('äÄçÇéÉêPHP-MySQLöÖÐþúÚ'));
+// "PHP-MySQL"
+function remove_non_ascii(str) {
+	const arr = str.split('');
+	return arr.filter(e => e.charCodeAt() > 32 && e.charCodeAt() < 127).join('');
+}
+
+// 33. Write a JavaScript function to remove non - word characters.
+// Test Data:
+console.log(remove_non_word('PHP ~!@#$%^&*()+`-={}[]|\\:";\'/?><., MySQL'));
+// "PHP - MySQL"
+function remove_non_word(str) {
+	return str.replace(/\W/g, '');
+}
+
+// 34. Write a JavaScript function to convert a string to title case.
+// Test Data :
+console.log(sentenceCase('PHP exercises. python exercises.'));
+// "Php Exercises. Python Exercises."
+function sentenceCase(str) {
+	const arr = str.split(' ');
+	return arr
+		.map(e => {
+			return e.replace(/^\w/, match => match.toUpperCase());
+		})
+		.join(' ');
 }
