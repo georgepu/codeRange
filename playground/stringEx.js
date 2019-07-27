@@ -479,7 +479,9 @@ console.log(remove_non_ascii('äÄçÇéÉêPHP-MySQLöÖÐþúÚ'));
 // "PHP-MySQL"
 function remove_non_ascii(str) {
 	const arr = str.split('');
-	return arr.filter(e => e.charCodeAt() > 32 && e.charCodeAt() < 127).join('');
+	return arr
+		.filter(e => e.charCodeAt() > 32 && e.charCodeAt() < 127)
+		.join('');
 }
 
 // 33. Write a JavaScript function to remove non - word characters.
@@ -501,4 +503,206 @@ function sentenceCase(str) {
 			return e.replace(/^\w/, match => match.toUpperCase());
 		})
 		.join(' ');
+}
+
+// 35. Write a JavaScript function to remove HTML/XML tags from string.
+// Test Data :
+console.log(strip_html_tags('<p><strong><em>PHP Exercises</em></strong></p>'));
+// "PHP Exercises"
+function strip_html_tags(str) {
+	const regPat = /<\/?\w+>/g;
+	return str.replace(regPat, '');
+}
+
+// 36. Write a JavaScript function to create a Zerofilled value with optional +, - sign.
+// Test Data :
+console.log(zeroFill(120, 5, '-'));
+// "+00120"
+console.log(zeroFill(29, 4));
+// "0029"
+function zeroFill(a, b, c) {
+	let j = c === '-' ? '-' : '';
+	// for (let i = 0; i < b - String(a).length; i++) {
+	// 	j += 0;
+	// }
+	return j + '0'.repeat(b - String(a).length) + a;
+}
+
+// 37. Write a JavaScript function to test case insensitive (except special Unicode characters) string comparison.
+// Test Data :
+console.log(compare_strings('abcdÄe', 'AbcDÄe'));
+// true
+console.log(compare_strings('ABCD', 'Abcd'));
+// false
+function compare_strings(str_o, str_t) {
+	const regPat = /^[a-zA-Z]+$/;
+	if (regPat.test(str_o) && regPat.test(str_t)) {
+		return str_o.toLowerCase() === str_t.toLowerCase();
+	} else return 'Sorry, can\'t compare special Unicoe charactor(s).';
+}
+
+// 38. Write a JavaScript function to create a case-insensitive search.
+// Test Data :
+console.log(case_insensitive_search('JavaScript Exercises', 'exercises'));
+// "Matched"
+console.log(case_insensitive_search('JavaScript Exercises', 'Exercises'));
+// "Matched"
+console.log(case_insensitive_search('JavaScript Exercises', 'Exercisess'));
+// "Not Matched"
+function case_insensitive_search(str, s) {
+	const regPat = new RegExp(s, 'gi');
+	return regPat.test(str) ? 'Matched' : 'Not Matched';
+}
+
+// 39. Write a JavaScript function to Uncapitalize? the first character of a string.
+// Test Data :
+console.log(Uncapitalize('Js string exercises'));
+// "js string exercises"
+function Uncapitalize(str) {
+	return str.replace(/^[A-Z]/, match => match.toLowerCase());
+}
+
+// 40. Write a JavaScript function to Uncapitalize the first letter of each word of a string.
+// Test Data :
+console.log(unCapitalize_Words('Js String Exercises'));
+// "js string exercises"
+function unCapitalize_Words(str) {
+	const regPat = /\s[A-Z]|^[A-Z]/g;
+	return str.replace(regPat, match => match.toLowerCase());
+}
+
+// 41. Write a JavaScript function to capitalize each word in the string.
+// Test Data :
+console.log(capitalizeWords('js string exercises'));
+// "JS STRING EXERCISES"
+function capitalizeWords(str) {
+	return str.replace(/\w/g, match => match.toUpperCase());
+}
+
+// 42. Write a JavaScript function to uncapitalize each word in the string.
+// Test Data :
+console.log(unCapitalizeWords('JS STRING EXERCISES'));
+// "js string exercises"
+function unCapitalizeWords(str) {
+	return str.replace(/[A-Z]/g, match => match.toLowerCase());
+}
+
+// 43. Write a JavaScript function to test whether the character at the provided (character) index is upper case.
+// Test Data :
+console.log(isUpperCaseAt('Js STRING EXERCISES', 3));
+// false
+function isUpperCaseAt(str, n) {
+	return /[A-Z]/.test(str.substring(n, n + 1));
+}
+
+// 44. Write a JavaScript function to test whether the character at the provided (character) index is lower case.
+// Test Data :
+console.log(isLowerCaseAt('Js STRING EXERCISES', 3));
+// true
+function isLowerCaseAt(str, n) {
+	return /[a-z]/.test(str.charAt(n));
+}
+
+// 45. Write a JavaScript function to get humanized number with the correct suffix such as 1st, 2nd, 3rd or 4th.
+// Test Data :
+console.log(humanize(1171));
+console.log(humanize(2043130));
+console.log(humanize(2192));
+// "1st"
+// "20th"
+// "302nd"
+function humanize(n) {
+	const regPat = /(1$)|(2$)|(3$)|([^123]$)/;
+	const replacer = (match, p1, p2, p3) => {
+		switch (match) {
+		case p1:
+			return /11$/.test(n) ? `${match}th` : `${match}st`;
+		case p2:
+			return /12$/.test(n) ? `${match}th` : `${match}nd`;
+		case p3:
+			return /13$/.test(n) ? `${match}th` : `${match}rd`;
+		default:
+			return `${match}th`;
+		}
+	};
+	return String(n).replace(regPat, replacer);
+}
+
+// 46. Write a JavaScript function to test whether a string starts with a specified string.
+// Test Data :
+console.log(startsWith('js string exercises', 'js '));
+// true
+function startsWith(str, s) {
+	return new RegExp(s).test(str.substr(0, s.length));
+}
+
+// 47. Write a JavaScript function to test whether a string ends with a specified string.
+// Test Data :
+console.log(endsWith('JS string exercises', 'exercises'));
+// true
+function endsWith(str, s) {
+	return new RegExp(`${s}$`).test(str);
+}
+
+// 48. Write a JavaScript function to get the successor of a string.
+
+// Note: The successor is calculated by incrementing characters starting from the rightmost alphanumeric
+// (or the rightmost character if there are no alphanumerics) in the string.
+// Incrementing a digit always results in another digit, and incrementing a letter results in another letter of the same case.
+// If the increment generates a carry, the character to the left of it is incremented.
+// This process repeats until there is no carry, adding an additional character if necessary.
+// Example :
+// string.successor("abcd") == "abce"
+// string.successor("THX1138") == "THX1139"
+// string.successor("< >") == "< >"
+// string.successor("1999zzz") == "2000aaa"
+// string.successor("ZZZ9999") == "AAAA0000"
+
+// Test Data :
+console.log(successor('A9ZZZ9999)8z'));
+console.log(successor('<1999zzz'));
+// "abce"
+// "3457"
+function successor(str) {
+	if (/^\w$/.test(str)) {
+		switch (str) {
+		case 'z':
+			return 'aa';
+		case 'Z':
+			return 'AA';
+		case '9':
+			return '10';
+		default:
+			return str;
+		}
+	} else {
+		const after = String.fromCharCode(str.charCodeAt(str.length - 1) + 1);
+		switch (after) {
+		case ':':
+			return successor(str.substring(0, str.length - 1)) + '0';
+		case '[':
+			return successor(str.substring(0, str.length - 1)) + 'A';
+		case '{':
+			return successor(str.substring(0, str.length - 1)) + 'a';
+		default:
+			return str.replace(/\w$/, after);
+		}
+	}
+}
+
+// 49. Write a JavaScript function to get unique guid (an acronym for 'Globally Unique Identifier?) of the specified length, or 32 by default.
+// Test Data :
+console.log(guid());
+console.log(guid(15));
+// "hRYilcoV7ajokxsYFl1dba41AyE0rUQR"
+// "b7pwBqrZwqaDrex"
+function guid(n) {
+	const list =
+		'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+	let arr = list.split('');
+	let result = [];
+	for (let i = 0; i < (n ? n : 32); i++) {
+		result.push(arr.splice(Math.floor(Math.random() * arr.length), 1)[0]);
+	}
+	return result.join('');
 }
