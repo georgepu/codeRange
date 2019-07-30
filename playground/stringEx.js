@@ -702,7 +702,7 @@ function guid(n) {
 	let arr = list.split('');
 	let result = [];
 	for (let i = 0; i < (n ? n : 32); i++) {
-		result.push(arr.splice(Math.floor(Math.random() * arr.length), 1)[0]);
+		result.push(...arr.splice(Math.floor(Math.random() * arr.length), 1));
 	}
 	return result.join('');
 }
