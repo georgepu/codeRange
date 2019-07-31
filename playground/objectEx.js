@@ -89,3 +89,36 @@ function bubbleSort(arr) {
 	return arr.sort((a, b) => a - b);
 }
 console.log(bubbleSort([6, 14, 0, 3, -2, 1]));
+
+// 7. Write a JavaScript program which returns a subset of a string.
+// Sample Data: dog
+// Expected Output: ["d", "do", "dog", "o", "og", "g"]
+{
+	let result = [];
+	function showSubset(str) {
+		for (let i = 0; i < str.length; i++) {
+			result.push(str.substr(0, i + 1));
+		}
+		return str.length < 2 ? result : showSubset(str.substring(1));
+	}
+	console.log(showSubset('dog'));
+}
+
+// 8. Write a JavaScript program to create a Clock.
+// Note: The output will come every second.
+// Expected Console Output :
+// "14:37:42"
+// "14:37:43"
+// "14:37:44"
+// "14:37:45"
+// "14:37:46"
+// "14:37:47"
+function myClock(h = 0, m = 0, s = 0) {
+	setInterval(() => {
+		s < 59
+			? s++
+			: ((s = 0), m < 59 ? m++ : ((m = 0), h < 23 ? h++ : (h = 0)));
+		console.log(`${h}:${m}:${s}`);
+	}, 1000);
+}
+myClock(23, 58, 42);
