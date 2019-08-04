@@ -3,7 +3,9 @@
 var student = {
 	name: 'David Rayy',
 	sclass: 'VI',
-	rollno: 12
+	rollno: 12,
+	george: () => {},
+	lan: function() {}
 };
 // Sample Output: name, sclass, rollno
 function keys(obj) {
@@ -114,11 +116,129 @@ console.log(bubbleSort([6, 14, 0, 3, -2, 1]));
 // "14:37:46"
 // "14:37:47"
 function myClock(h = 0, m = 0, s = 0) {
-	setInterval(() => {
+	let id = setInterval(() => {
 		s < 59
 			? s++
 			: ((s = 0), m < 59 ? m++ : ((m = 0), h < 23 ? h++ : (h = 0)));
 		console.log(`${h}:${m}:${s}`);
+		if (m === 59) clearInterval(id);
 	}, 1000);
 }
 myClock(23, 58, 42);
+
+// 9. Write a JavaScript program to calculate the area and perimeter of a circle.
+// Note : Create two methods to calculate the area and perimeter. The radius of the circle will be supplied by the user.
+function circle(r) {
+	return {
+		perimeter: 2 * Math.PI * r,
+		area: Math.pow(r, 2) * Math.PI
+	};
+}
+let { area, perimeter } = circle(100);
+console.log(`Area of circle is ${area} and perimeter ${perimeter}.`);
+
+// 10. Write a JavaScript program to sort an array of JavaScript objects.
+// Sample Object :
+
+var library = [
+	{
+		title: 'The Road Ahead',
+		author: 'Bill Gates',
+		libraryID: 1254
+	},
+	{
+		title: 'Walter Isaacson',
+		author: 'Steve Jobs',
+		libraryID: 4264
+	},
+	{
+		title: 'Mockingjay: The Final Book of The Hunger Games',
+		author: 'Suzanne Collins',
+		libraryID: 3245
+	}
+];
+// Expected Output:
+
+// [[object Object] {
+//   author: "Walter Isaacson",
+//   libraryID: 4264,
+//   title: "Steve Jobs"
+// }, [object Object] {
+//   author: "Suzanne Collins",
+//   libraryID: 3245,
+//   title: "Mockingjay: The Final Book of The Hunger Games"
+// }, [object Object] {
+//   author: "The Road Ahead",
+//   libraryID: 1254,
+//   title: "Bill Gates"
+// }]
+(function sortArr(arr) {
+	let sortObj = obj => {
+		let newObj = {};
+		Object.keys(obj)
+			.sort()
+			.forEach(o => {
+				newObj[o] = obj[o];
+			});
+		return newObj;
+	};
+	let newArr = arr.map(sortObj);
+	console.log(
+		newArr.sort((a, b) => {
+			if (a.title > b.title) return -1;
+			if (a.title < b.title) return 1;
+			return 0;
+		})
+	);
+})(library);
+
+// 11. Write a JavaScript function to print all the methods in an JavaScript object.
+// Test Data:
+// console.log(all_properties(Array));
+// ["length", "name", "arguments", "caller", "prototype", "isArray", "observe", "unobserve"]
+class Obj_fac {
+	constructor() {
+		this.george = 1;
+		this.lan = 2;
+		this.daisy = () => {};
+		this.kenneth = function() {};
+	}
+	choco() {} //with class syntax, class methods won't show because they're not enumerable in prototype.
+}
+(function all_methods(obj) {
+	let result = [];
+	if (obj.constructor === Object || Function) {
+		for (let o in obj) {
+			obj[o].constructor === Function ? result.push(o) : 0;
+		}
+	}
+	console.log(
+		obj,
+		result,
+		Object.getOwnPropertyNames(Object.getPrototypeOf(obj)) //getOwnPropertyNames will display non-enumerable
+	);
+})(Obj_fac);
+
+// 12. Write a JavaScript function to parse an URL.
+(function parse_URL(url) {
+	const regPat = /http[s]?:\/\//;
+	const newStr1 = url.replace(regPat, '');
+	const newStr2 = newStr1.substring(0, newStr1.search('/'));
+	console.log(`Company's domain is ${newStr2.match(/[^.]+\.\w+$/).join()}`);
+})('https://dep.www.gt.citigroup.com/index.html');
+
+// 13. Write a JavaScript function to retrieve all the names of object's own and inherited properties.
+function all_props(obj) {
+	if (typeof obj === 'object') {
+		return Object.getOwnPropertyNames(obj);
+	}
+}
+console.log(all_props(student));
+
+// 14. Write a JavaScript function to retrieve all the values of an object's properties.
+function all_values(obj) {
+	if (typeof obj === 'object') {
+		return Object.values(obj);
+	}
+}
+console.log(all_values(new Obj_fac()));
