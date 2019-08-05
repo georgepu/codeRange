@@ -242,3 +242,35 @@ function all_values(obj) {
 	}
 }
 console.log(all_values(new Obj_fac()));
+
+// 15. Write a JavaScript function to convert an object into a list of`[key, value]` pairs.
+(function objKeyValue(obj) {
+	let result = [];
+	if (obj.constructor === Object) {
+		for (let [k, v] of Object.entries(obj)) {
+			result.push([k, v]);
+		}
+	}
+	console.log(result);
+})(student);
+
+// 16. Write a JavaScript function to get a copy of the object where the keys have become the values and the values the keys.
+(function keyValueRev(obj) {
+	let newObj = {};
+	if (obj.constructor === Object) {
+		for (let [k, v] of Object.entries(obj)) {
+			newObj[v] = k;
+		}
+	}
+	console.log(newObj);
+})(student);
+
+// 17. Write a JavaScript function to check if an object contains given property.
+(function propChk(obj, p) {
+	console.log(
+		obj.constructor === Object ? hasOwnProperty.call(obj, p) : null
+	);
+})(student, 'lan1');
+
+// 18. Write a JavaScript function to check whether a given value is a DOM element.
+// use nodeName, nodeType
