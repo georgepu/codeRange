@@ -10,20 +10,20 @@ console.log(ar1);
 	for (member of ary) {
 		console.log(member);
 	}
-}(ar1));
+})(ar1);
 
 // associative array for (key in emp) {}
 const obj1 = {
 	a: 1,
 	b: 2,
 	c: 3,
-	d: 4,
+	d: 4
 };
 (function showObj(obj) {
 	for (key in obj) {
 		console.log(obj[key]);
 	}
-}(obj1));
+})(obj1);
 
 const test = [];
 test.hi = 2;
@@ -65,7 +65,7 @@ console.log(toString.call(myObj));
 console.log(toString(myObj));
 
 // deal with circular obj
-const customStringify = (v) => {
+const customStringify = v => {
 	const cache = new Set();
 	return JSON.stringify(v, (key, value) => {
 		if (typeof value === 'object' && value !== null) {
@@ -103,7 +103,7 @@ const oo = {
 	name: 'George',
 	myFunc() {
 		console.log(`hey dude!${this.name}`);
-	},
+	}
 };
 oo.myFunc();
 
@@ -115,19 +115,19 @@ pp(oo.myFunc);
 
 // interview question
 for (let i = 0; i <= 5; i++) {
-	(function (j) {
+	(function(j) {
 		setTimeout(() => {
 			console.log(j);
 		}, 0);
-	}(i));
+	})(i);
 }
 
 // interview question
 function bad(person) {
 	if (
-		JSON.stringify(person)
-    === JSON.stringify({
-    	name: 'Lian',
+		JSON.stringify(person) ===
+    JSON.stringify({
+    	name: 'Lian'
     })
 	) {
 		console.log('hey');
@@ -136,7 +136,7 @@ function bad(person) {
 	}
 }
 bad({
-	name: 'Lian',
+	name: 'Lian'
 });
 
 // ES6 class constructor
@@ -174,10 +174,10 @@ jeep.disclaimer();
 const salaries = {
 	John: 100,
 	Pete: 300,
-	Mary: 250,
+	Mary: 250
 };
 const dummy = {};
-((a) => {
+(a => {
 	const [name = null] = Object.entries(a).sort((x, y) => y[1] - x[1])[0] || [];
 	console.log(name);
 })(dummy);
@@ -186,7 +186,7 @@ const boss = {
 	ele: 888,
 	bobby() {
 		const ele = 88888;
-		const amen = function () {
+		const amen = function() {
 			console.log(this.ele);
 		}.bind(this);
 		amen();
@@ -199,8 +199,8 @@ const boss = {
 				console.log(this.ele);
 			};
 			george();
-		},
-	},
+		}
+	}
 };
 global.ele = 8970;
 boss.bobby();
@@ -209,15 +209,32 @@ boss.anotherObj.lynn();
 function foo(x = 42) {
 	console.log(x);
 }
-foo([,,]);
+foo([, ,]);
 
 global.x = 8;
 {
 	global.x = 10;
 	function weird(x = 2, f = () => x) {
-		 var x = 5;
+		var x = 5;
 		console.log(f());
-		console.log(x); 
+		console.log(x);
 	}
 	weird();
 }
+
+// let asyncOp = new Promise(resolve => {
+//  setTimeout(() => {
+//    console.log('Async op.');
+//    resolve(8888);
+//  }, 3000);
+// });
+Promise.resolve({
+	then: resolve => {
+		setTimeout(() => {
+			console.log('Async op.');
+			resolve(8888);
+		}, 3000);
+	}
+}).then(resp => {
+	console.log(`The value is ${resp} and it works!`);
+});
