@@ -93,9 +93,7 @@ function isAnagram(str1, str2) {
 // Example string: 'Web Development Tutorial'
 // Expected Output: 'Development'
 (function longestWord(str) {
-	console.log(
-		str.split(' ').reduce((l, a) => (a.length <= l.length ? l : a))
-	);
+	console.log(str.split(' ').reduce((l, a) => (a.length <= l.length ? l : a)));
 })('Web Development Tutorialhahaha');
 
 // 7. Write a JavaScript function that accepts a string as a parameter and counts the number of vowels within the string.
@@ -142,3 +140,81 @@ console.log(getType(88 === 88));
 		console.log(p);
 	}
 })(8);
+
+// 11. Write a JavaScript function which will take an array of numbers stored and find the second lowest and second greatest numbers, respectively.
+// Sample array: [1, 2, 3, 4, 5]
+// Expected Output: 2, 4
+function findNums(arr) {
+	let newArr = arr.sort((a, b) => a - b);
+	return Array(newArr[1], newArr[newArr.length - 2]).toString();
+}
+console.log(findNums([1, 2, 3, 4, 5]));
+
+// 12. Write a JavaScript function which says whether a number is perfect.
+// According to Wikipedia: In number theory, a perfect number is a positive integer that is equal to the sum of its proper positive divisors, that is, the sum of its positive divisors excluding the number itself(also known as its aliquot sum).Equivalently, a perfect number is a number that is half the sum of all of its positive divisors(including itself).
+// Example : The first perfect number is 6, because 1, 2, and 3 are its proper positive divisors, and 1 + 2 + 3 = 6. Equivalently, the number 6 is equal to half the sum of all its positive divisors: (1 + 2 + 3 + 6) / 2 = 6. The next perfect number is 28 = 1 + 2 + 4 + 7 + 14. This is followed by the perfect numbers 496 and 8128.
+function isPerfectNum(n) {
+	let t = 1;
+	for (let i = 2; i < n; i++) {
+		t += n % i === 0 && i;
+	}
+	return t === n ? true : false;
+}
+console.log(isPerfectNum(28));
+
+// 13. Write a JavaScript function to compute the factors of a positive integer.
+function factors(n) {
+	let result = [];
+	for (let i = 1; i <= n; i++) {
+		if (n % i === 0) result.push(i);
+	}
+	return result;
+}
+console.log(factors(98));
+
+// 14. Write a JavaScript function to convert an amount to coins.
+// Sample function : amountTocoins(46, [25, 10, 5, 2, 1])
+// Here 46 is the amount.and 25, 10, 5, 2, 1 are coins.
+// 	Output : 25, 10, 10, 1
+{
+	let result = [];
+	function amount2coins(amount, coins) {
+		result.push(~~(amount / coins[0]));
+		amount %= coins[0];
+		coins.shift(coins[0]);
+		if (amount > 0) amount2coins(amount, coins);
+		return result;
+	}
+}
+console.log(amount2coins(46, [25, 10, 5, 2, 1]));
+
+// 15. Write a JavaScript function to compute the value of bn where n is the exponent and b is the bases.Accept b and n from the user and display the result.
+function power(b, n) {
+	return Math.pow(b, n);
+}
+console.log(power(9, 13));
+
+// 16. Write a JavaScript function to extract unique characters from a string.
+// Example string: "thequickbrownfoxjumpsoverthelazydog"
+// Expected Output: "thequickbrownfxjmpsvlazydg"
+{
+	let result = [];
+	function extractChar(str) {
+		result.push(str[0]);
+		let newStr = str.replace(new RegExp(str[0], 'gi'), '');
+		!result.join('').match(new RegExp(newStr[0])) && extractChar(newStr);
+		return result.join('');
+	}
+}
+console.log(extractChar('thequickbrownfoxjumpsoverthelazydogddddddddddd'));
+
+// 17. Write a JavaScript function to  get the number of occurrences of each letter in specified string.
+function occurred(str) {
+	let result = {},
+		c;
+	for (c of str) {
+		result[c] = str.match(new RegExp(c, 'g')).length;
+	}
+	return result;
+}
+console.log(occurred('Once Upon a Time In Hollywood'));
