@@ -93,7 +93,9 @@ function isAnagram(str1, str2) {
 // Example string: 'Web Development Tutorial'
 // Expected Output: 'Development'
 (function longestWord(str) {
-	console.log(str.split(' ').reduce((l, a) => (a.length <= l.length ? l : a)));
+	console.log(
+		str.split(' ').reduce((l, a) => (a.length <= l.length ? l : a))
+	);
 })('Web Development Tutorialhahaha');
 
 // 7. Write a JavaScript function that accepts a string as a parameter and counts the number of vowels within the string.
@@ -218,3 +220,132 @@ function occurred(str) {
 	return result;
 }
 console.log(occurred('Once Upon a Time In Hollywood'));
+
+// 18. Write a function for searching JavaScript arrays with a binary search.
+// Note: A binary search searches by splitting an array into smaller and smaller chunks until it finds the desired value.
+function binSearch(arr, s) {
+	let sorted = arr.sort((a, b) => a - b);
+
+	return (function bs(newArr, s) {
+		let startPoint = 0,
+			temp,
+			midPoint = ~~(newArr.length / 2);
+		if (s === newArr[midPoint]) return midPoint;
+		else if (midPoint > 0) {
+			if (s < newArr[midPoint]) return bs(newArr.slice(0, midPoint), s);
+			else {
+				startPoint = midPoint + 1;
+				temp = bs(newArr.slice(midPoint + 1), s) + startPoint;
+				return Number.isInteger(temp) ? temp : 'Try again!';
+			}
+		}
+		return 'Try again!';
+	})(sorted, s);
+}
+console.log('Look here', binSearch([3, 6, 1, 2, 9, 10, 3, 34, 88, 22, 5], 910));
+
+// 19. Write a JavaScript function that returns array elements larger than a number.
+function pickArr(arr, n) {
+	return arr.filter(e => e > n);
+}
+console.log(pickArr([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 5));
+
+// 20. Write a JavaScript function that generates a string id(specified length) of random characters.
+// Sample character list: "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
+function strId(l, c) {
+	return l.split('').reduce((r, e, i) => (e === c ? i : r), 0);
+}
+console.log(
+	strId('ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789', 'y')
+);
+
+// 21. Write a JavaScript function to get all possible subset with a fixed length(for example 2) combinations in an array.
+// Sample array: [1, 2, 3] and subset length is 2
+// Expected output: [[2, 1], [3, 1], [3, 2], [3, 2, 1]]
+function subset(arra, arra_size) {
+	var result_set = [],
+		result,
+		i;
+
+	for (var x = 0; x < Math.pow(2, arra.length); x++) {
+		result = [];
+		i = arra.length - 1;
+		do {
+			if ((x & (1 << i)) !== 0) {
+				result.push(arra[i]);
+			}
+		} while (i--);
+
+		if (result.length >= arra_size) {
+			result_set.push(result);
+		}
+	}
+
+	return result_set;
+}
+console.log(subset([1, 2, 3], 2));
+
+// 22. Write a JavaScript function that accepts two arguments, a string and a letter and the function will count the number of occurrences of the specified letter within the string.
+// Sample arguments: 'w3resource.com', 'o'
+// Expected output: 2
+{
+	function occurred(str, o) {
+		return str.match(new RegExp(o, 'g')).length;
+	}
+	console.log(occurred('w3resource.com', 'r'));
+}
+
+// 23. Write a JavaScript function to find the first not repeated character.
+// Sample arguments: 'abacddbececzd'
+// Expected output: 'e'
+function findUnique(str) {
+	return str
+		.split('')
+		.reduce((r, e) => (str.match(new RegExp(e, 'g')).length === 1 ? e : r));
+}
+console.log(findUnique('abacddbececzd'));
+
+// 24. Write a JavaScript function to apply Bubble Sort algorithm.
+// Note: According to wikipedia "Bubble sort, sometimes referred to as sinking sort, is a simple sorting algorithm that works by repeatedly stepping through the list to be sorted, comparing each pair of adjacent items and swapping them if they are in the wrong order".
+// Sample array: [12, 345, 4, 546, 122, 84, 98, 64, 9, 1, 3223, 455, 23, 234, 213]
+// Expected output: [3223, 546, 455, 345, 234, 213, 122, 98, 84, 64, 23, 12, 9, 4, 1]
+
+// 25. Write a JavaScript function that accept a list of country names as input and returns the longest country name as output.
+// Sample function : Longest_Country_Name(["Australia", "Germany", "United States of America"])
+// Expected output: "United States of America"
+function Longest_Country_Name(arr) {
+	return arr.reduce((ans, e) => {
+		return e.length > ans.length ? e : ans;
+	});
+}
+console.log(
+	Longest_Country_Name2(['Australia', 'Germany', 'United States of America'])
+);
+
+function Longest_Country_Name2(arr) {
+	let obj = {};
+	for (e of arr) {
+		obj[e.length] = e;
+	}
+	return obj[Object.keys(obj).sort((a, b) => b - a)[0]];
+}
+
+// 26. Write a JavaScript function to find longest substring in a given a string without repeating characters.
+{
+	let result = [],
+		i = 0;
+	function findFromRight(str) {
+		if (new Set(str.split('')).size === str.length) return str;
+		for (let j = str.length - 1; j > 0; j--) {
+			return findFromRight(str.substr(i, j));
+		}
+	}
+	function getResult(string) {
+		while (i < string.length) {
+			result.push(findFromRight(string));
+			return getResult(string.substr(i + 1));
+		}
+	}
+	getResult('aabbababcdefghijklmnopqrstuvvwxyzzujk');
+	console.log(result.reduce((r, e) => (e.length > r.length ? e : r)));
+}
